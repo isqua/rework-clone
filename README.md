@@ -52,3 +52,7 @@ var css = rework(inputCSS)
 
 It will work with all `foo` properties.
 
+## License
+
+MIT
+
