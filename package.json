@@ -1,0 +1,36 @@
+{
+  "name": "rework-clone",
+  "version": "0.0.0",
+  "description": "Clone module for Rework",
+  "main": "index.js",
+  "peerDependencies": {
+    "rework": ">= 0.18.x"
+  },
+  "devDependencies": {
+    "rework": ">= 0.18.x"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/isquariel/rework-clone.git"
+  },
+  "keywords": [
+    "rework",
+    "css",
+    "clone",
+    "copy",
+    "inherit"
+  ],
+  "author": {
+    "name": "isquariel",
+    "email": "tavsophi@gmail.com",
+    "url": "https://github.com/isquariel"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isquariel/rework-clone/issues"
+  }
+}
+

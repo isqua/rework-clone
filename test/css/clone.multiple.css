@@ -1,0 +1,11 @@
+.a {
+  background: #fff;
+  color: #ddd;
+}
+.b {
+  color: #000;
+}
+.c {
+  clone: .a;
+  clone: .b;
+}

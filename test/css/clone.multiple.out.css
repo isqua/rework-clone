@@ -1,0 +1,14 @@
+.a {
+  background: #fff;
+  color: #ddd;
+}
+
+.b {
+  color: #000;
+}
+
+.c {
+  background: #fff;
+  color: #ddd;
+  color: #000;
+}

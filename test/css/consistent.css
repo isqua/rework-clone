@@ -1,0 +1,7 @@
+.a .b {
+  margin: 10px;
+}
+.c {
+  clone: .a .b;
+  padding: 10px;
+}

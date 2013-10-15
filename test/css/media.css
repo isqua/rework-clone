@@ -1,0 +1,8 @@
+.a {
+  border: 1px solid red;
+}
+@media screen only and (min-width: 768px) {
+  .b {
+    clone: .a;
+  }
+}
