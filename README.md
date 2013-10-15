@@ -1,11 +1,10 @@
-rework-clone
-============
+# rework-clone
 
-This module clones properties from one selectors to another instead adding
-appropriate selector as [rework-inherit](https://github.com/reworkcss/rework-inherit)
-(rework.extend()).
+This module clones properties from one rule set to another, unlike
+[rework-inherit](https://github.com/reworkcss/rework-inherit) (rework.extend())
+which concatenates the selectors.
 
-Don’t copy anything and everything! Think, when you need to inherit and when to
+Don’t copy anything and everything! Think when you need to inherit and when to
 clone.
 
 ## Example
@@ -30,7 +29,7 @@ yields:
 }
 ```
 
-## API
+## Usage
 
 ```js
 var clone = require('rework-clone');
@@ -55,4 +54,3 @@ It will work with all `foo` properties.
 ## License
 
 MIT
-
