@@ -13,42 +13,39 @@ function Clone (style, options) {
         processing(rules, regexp, rrule);
       });
     }
-    if (rule.type !== 'rule') {
-      return;
+    if (rule.type === 'rule') {
+      processing(rules, regexp, rule);
     }
-    processing(rules, regexp, rule);
   });
 }
 
 function processing (rules, regexp, rule) {
   var clones = getClones(regexp, rule.declarations);
-  if (clones.length !== 0) {
-    rule.declarations = getProperties(rules, clones).concat(rule.declarations);
-  }
+  rule.declarations = getProperties(rules, clones)
+    .concat(rule.declarations)
+    .filter(function (dec) {
+      return !regexp.test(dec.property);
+    });
 }
 
 function getClones (regexp, declarations) {
-  var clones = [], i, dec;
-  for (i = 0; i < declarations.length; i++) {
-    dec = declarations[i];
-    if (regexp.test(dec.property)) {
-      clones.push(dec.value);
-      declarations.splice(i--, 1);
-    }
-  }
-  return clones;
+  return declarations.filter(function (dec) {
+    return regexp.test(dec.property);
+  }).map(function (dec) {
+    return dec.value;
+  })
 }
 
 function getProperties (rules, selectors) {
   var declarations = [];
-  rules.forEach(function (rule) {
-    if (rule.selectors && rule.selectors.length > 0) {
-      selectors.forEach(function (selector) {
-        if (rule.selectors.indexOf(selector) !== -1) {
-          declarations = declarations.concat(rule.declarations);
-        }
-      });
-    }
+  rules.filter(function (rule) {
+    return rule.selectors && rule.selectors.length > 0;
+  }).forEach(function (rule) {
+    selectors.filter(function (selector) {
+      return rule.selectors.indexOf(selector) !== -1;
+    }).forEach(function (selector) {
+      declarations = declarations.concat(rule.declarations);
+    });
   });
   return declarations;
 }
