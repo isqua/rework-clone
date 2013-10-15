@@ -4,33 +4,31 @@ exports = module.exports = function (options) {
   }
 }
 
-var rules, regexp;
-
 function Clone (style, options) {
-  regexp = options.regexp || /^(clone|copy)?$/i
-  var clones, properties;
-  rules = style.rules;
+  var regexp = options.regexp || /^(clone|copy)?$/i
+  var rules = style.rules;
   rules.forEach(function (rule) {
     if (rule.type === 'media') {
-      return rule.rules.forEach(processing);
+      return rule.rules.forEach(function (rrule) {
+        processing(rules, regexp, rrule);
+      });
     }
     if (rule.type !== 'rule') {
       return;
     }
-    processing(rule);
+    processing(rules, regexp, rule);
   });
 }
 
-function processing (rule) {
-  var clones, properties;
-  clones = getClones(rule.declarations);
+function processing (rules, regexp, rule) {
+  var clones = getClones(regexp, rule.declarations);
   if (clones.length !== 0) {
-    properties = getProperties(rules, clones);
+    var properties = getProperties(rules, clones);
     duplicateProperties(rule, properties);
   }
 }
 
-function getClones (declarations) {
+function getClones (regexp, declarations) {
   var clones = [], i, dec;
   for (i = 0; i < declarations.length; i++) {
     dec = declarations[i];
