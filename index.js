@@ -7,14 +7,16 @@ exports = module.exports = function (options) {
 function Clone (style, options) {
   var regexp = options.regexp || /^(clone|copy)?$/i
   var rules = style.rules;
-  rules.forEach(function (rule) {
+  var doProcess = function(rule) {
+    return process(rules, regexp, rule);
+  };
+  rules = rules.map(function (rule) {
     if (rule.type === 'media') {
-      return rule.rules.forEach(function (rrule) {
-        process(rules, regexp, rrule);
-      });
+      rule.rules = rule.rules.map(doProcess);
+      return rule;
     }
     if (rule.type === 'rule') {
-      process(rules, regexp, rule);
+      return doProcess(rule);
     }
   });
 }
@@ -26,6 +28,7 @@ function process (rules, regexp, rule) {
     .filter(function (dec) {
       return !regexp.test(dec.property);
     });
+  return rule;
 }
 
 function getClones (regexp, declarations) {
