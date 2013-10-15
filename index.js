@@ -23,8 +23,7 @@ function Clone (style, options) {
 function processing (rules, regexp, rule) {
   var clones = getClones(regexp, rule.declarations);
   if (clones.length !== 0) {
-    var properties = getProperties(rules, clones);
-    duplicateProperties(rule, properties);
+    rule.declarations = getProperties(rules, clones).concat(rule.declarations);
   }
 }
 
@@ -53,8 +52,3 @@ function getProperties (rules, selectors) {
   });
   return declarations;
 }
-
-function duplicateProperties (item, declarations) {
-  item.declarations = declarations.concat(item.declarations);
-}
-
