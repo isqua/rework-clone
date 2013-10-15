@@ -10,16 +10,16 @@ function Clone (style, options) {
   rules.forEach(function (rule) {
     if (rule.type === 'media') {
       return rule.rules.forEach(function (rrule) {
-        processing(rules, regexp, rrule);
+        process(rules, regexp, rrule);
       });
     }
     if (rule.type === 'rule') {
-      processing(rules, regexp, rule);
+      process(rules, regexp, rule);
     }
   });
 }
 
-function processing (rules, regexp, rule) {
+function process (rules, regexp, rule) {
   var clones = getClones(regexp, rule.declarations);
   rule.declarations = getProperties(rules, clones)
     .concat(rule.declarations)
