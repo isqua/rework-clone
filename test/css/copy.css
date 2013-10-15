@@ -1,0 +1,8 @@
+.a {
+  background: #fff;
+  color: #000;
+}
+
+.b {
+  copy: .a;
+}

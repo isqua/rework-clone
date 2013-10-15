@@ -1,0 +1,9 @@
+.b {
+  clone: .a;
+}
+.a {
+  background: red;
+}
+.a {
+  color: black;
+}
