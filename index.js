@@ -4,59 +4,51 @@ exports = module.exports = function (options) {
   }
 }
 
-var rules, regexp;
-
 function Clone (style, options) {
-  regexp = options.regexp || /^(clone|copy)?$/i
-  var clones, properties;
-  rules = style.rules;
-  rules.forEach(function (rule) {
+  var regexp = options.regexp || /^(clone|copy)?$/i
+  var rules = style.rules;
+  var doProcess = function(rule) {
+    return process(rules, regexp, rule);
+  };
+  rules = rules.map(function (rule) {
     if (rule.type === 'media') {
-      return rule.rules.forEach(processing);
+      rule.rules = rule.rules.map(doProcess);
+      return rule;
     }
-    if (rule.type !== 'rule') {
-      return;
+    if (rule.type === 'rule') {
+      return doProcess(rule);
     }
-    processing(rule);
   });
 }
 
-function processing (rule) {
-  var clones, properties;
-  clones = getClones(rule.declarations);
-  if (clones.length !== 0) {
-    properties = getProperties(rules, clones);
-    duplicateProperties(rule, properties);
-  }
+function process (rules, regexp, rule) {
+  var clones = getClones(regexp, rule.declarations);
+  rule.declarations = getProperties(rules, clones)
+    .concat(rule.declarations)
+    .filter(function (dec) {
+      return !regexp.test(dec.property);
+    });
+  return rule;
 }
 
-function getClones (declarations) {
-  var clones = [], i, dec;
-  for (i = 0; i < declarations.length; i++) {
-    dec = declarations[i];
-    if (regexp.test(dec.property)) {
-      clones.push(dec.value);
-      declarations.splice(i--, 1);
-    }
-  }
-  return clones;
+function getClones (regexp, declarations) {
+  return declarations.filter(function (dec) {
+    return regexp.test(dec.property);
+  }).map(function (dec) {
+    return dec.value;
+  })
 }
 
 function getProperties (rules, selectors) {
   var declarations = [];
-  rules.forEach(function (rule) {
-    if (rule.selectors && rule.selectors.length > 0) {
-      selectors.forEach(function (selector) {
-        if (rule.selectors.indexOf(selector) !== -1) {
-          declarations = declarations.concat(rule.declarations);
-        }
-      });
-    }
+  rules.filter(function (rule) {
+    return rule.selectors && rule.selectors.length > 0;
+  }).forEach(function (rule) {
+    selectors.filter(function (selector) {
+      return rule.selectors.indexOf(selector) !== -1;
+    }).forEach(function (selector) {
+      declarations = declarations.concat(rule.declarations);
+    });
   });
   return declarations;
 }
-
-function duplicateProperties (item, declarations) {
-  item.declarations = declarations.concat(item.declarations);
-}
-
