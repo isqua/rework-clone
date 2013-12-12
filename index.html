@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Rework-clone : Clone module for Rework" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Rework-clone</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Isquariel/rework-clone">View on GitHub</a>
+
+          <h1 id="project_title">Rework-clone</h1>
+          <h2 id="project_tagline">Clone module for Rework</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Isquariel/rework-clone/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Isquariel/rework-clone/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="rework-clone" class="anchor" href="#rework-clone"><span class="octicon octicon-link"></span></a>rework-clone</h1>
+
+<p>This module clones properties from one rule set to another, unlike
+<a href="https://github.com/reworkcss/rework-inherit">rework-inherit</a> (rework.extend())
+which concatenates the selectors.</p>
+
+<p>Don’t copy anything and everything! Think when you need to inherit and when to
+clone.</p>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-css"><pre><span class="nc">.a</span> <span class="p">{</span>
+  <span class="k">background</span><span class="o">:</span> <span class="nb">red</span>
+<span class="p">}</span>
+<span class="nc">.b</span> <span class="p">{</span>
+  <span class="n">clone</span><span class="o">:</span> <span class="o">.</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>yields:</p>
+
+<div class="highlight highlight-css"><pre><span class="nc">.a</span> <span class="p">{</span>
+  <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.b</span> <span class="p">{</span>
+  <span class="k">background</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">clone</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'rework-clone'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">css</span> <span class="o">=</span> <span class="nx">rework</span><span class="p">(</span><span class="nx">inputCSS</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">clone</span><span class="p">(</span><span class="nx">options</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+</pre></div>
+
+<h3>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
+
+<p>This is only one option: <code>regexp</code> to replace.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">css</span> <span class="o">=</span> <span class="nx">rework</span><span class="p">(</span><span class="nx">inputCSS</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">clone</span><span class="p">({</span><span class="nx">regexp</span><span class="o">:</span> <span class="sr">/^foo?$/</span><span class="p">}))</span>
+  <span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+</pre></div>
+
+<p>It will work with all <code>foo</code> properties.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rework-clone maintained by <a href="https://github.com/Isquariel">Isquariel</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
