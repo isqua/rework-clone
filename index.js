@@ -1,13 +1,13 @@
 exports = module.exports = function (options) {
   return function clone(style) {
-    return new Clone(style, options || {})
-  }
-}
+    return new Clone(style, options || {});
+  };
+};
 
 function Clone (style, options) {
-  var regexp = options.regexp || /^(clone|copy)?$/i
-  var rules = style.rules;
-  var doProcess = function(rule) {
+  var regexp = options.regexp || /^(clone|copy)?$/i,
+  rules = style.rules,
+  doProcess = function(rule) {
     return process(rules, regexp, rule);
   };
   rules = rules.map(function (rule) {
@@ -36,7 +36,7 @@ function getClones (regexp, declarations) {
     return regexp.test(dec.property);
   }).map(function (dec) {
     return dec.value;
-  })
+  });
 }
 
 function getProperties (rules, selectors) {
