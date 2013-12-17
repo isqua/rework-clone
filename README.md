@@ -1,5 +1,7 @@
 # rework-clone
 
+[![Build Status](https://travis-ci.org/Isquariel/rework-clone.png?branch=master)](https://travis-ci.org/Isquariel/rework-clone)
+
 This module clones properties from one rule set to another, unlike
 [rework-inherit](https://github.com/reworkcss/rework-inherit) (rework.extend())
 which concatenates the selectors.
