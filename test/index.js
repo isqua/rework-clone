@@ -12,6 +12,7 @@ function test(file, msg, options) {
     options = {};
   }
   var out = rework(read(file)).use(clone(options)).toString();
+  fs.writeFileSync('out.css', out);
   assert.equal(out, read(file + '.out'), msg + ':\n' + out);
 }
 
@@ -24,6 +25,7 @@ test('media', 'Media failed');
 test('regexp', 'Regexp failed', {regexp: /^foo?$/i});
 test('order', 'Order failed');
 test('placeholder', 'Placeholder failed');
+test('important', 'Important failed');
 
 console.log('All right!');
 

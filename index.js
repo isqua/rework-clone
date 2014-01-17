@@ -1,6 +1,6 @@
 exports = module.exports = function (options) {
   return function clone(style) {
-    return new Clone(style, options || {});
+    return Clone(style, options || {});
   };
 };
 
@@ -39,15 +39,48 @@ function getClones (regexp, declarations) {
   });
 }
 
+function cloneObject (obj) {
+  var isArray = Array.isArray(obj),
+      newObj = isArray ? [] : {};
+  if (isArray) {
+    obj.forEach(function(item, index) {
+      newObj[index] = item;
+    });
+  } else {
+    for (key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (Object.prototype.toString.call(obj[key]) === "[object Object]") {
+          newObj[key] = cloneObject(obj[key]);
+        } else {
+          newObj[key] = obj[key];
+        }
+      }
+    }
+  }
+  return newObj;
+}
+
 function getProperties (rules, selectors) {
-  var declarations = [];
+  var declarations = [],
+  reg = /\s*\!important\s*$/;
   rules.filter(function (rule) {
     return rule.selectors && rule.selectors.length > 0;
   }).forEach(function (rule) {
-    selectors.filter(function (selector) {
-      return rule.selectors.indexOf(selector) !== -1;
-    }).forEach(function (selector) {
-      declarations = declarations.concat(rule.declarations);
+    selectors.forEach(function (selector) {
+      var important = false;
+      if (reg.test(selector)) {
+        important = true;
+        selector = selector.replace(reg, '');
+      }
+      if (rule.selectors.indexOf(selector) !== -1) {
+        declarations = declarations.concat(rule.declarations.map(function (declaration) {
+          declaration = cloneObject(declaration);
+          if (important) {
+            declaration.value = declaration.value + ' !important';
+          }
+          return declaration;
+        }));
+      }
     });
   });
   return declarations;
