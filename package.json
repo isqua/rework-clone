@@ -4,10 +4,10 @@
   "description": "Clone module for Rework",
   "main": "index.js",
   "peerDependencies": {
-    "rework": ">= 0.18.x"
+    "rework": "^1.0.1"
   },
   "devDependencies": {
-    "rework": ">= 0.18.x"
+    "rework": "^1.0.1"
   },
   "scripts": {
     "test": "node test"
