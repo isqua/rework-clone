@@ -1,4 +1,5 @@
 # rework-clone
+
 [![NPM version][npm-image]][npm-link]
 [![Build status][travis-image]][travis-link]
 [![devDependency status][devdeps-image]][devdeps-link]
@@ -58,6 +59,7 @@ It will work with all `foo` properties.
 ## License
 
 MIT
+
 [npm-image]: https://img.shields.io/npm/v/rework-clone.svg?style=flat
 [npm-link]: https://npmjs.org/package/rework-clone
 [travis-image]: https://img.shields.io/travis/isqua/rework-clone.svg?style=flat
