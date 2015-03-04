@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/isquariel/rework-clone.git"
+    "url": "git://github.com/isqua/rework-clone.git"
   },
   "keywords": [
     "rework",
@@ -24,13 +24,13 @@
     "inherit"
   ],
   "author": {
-    "name": "isquariel",
-    "email": "tavsophi@gmail.com",
-    "url": "https://github.com/isquariel"
+    "name": "isqua",
+    "email": "isqua@isqua.ru",
+    "url": "https://github.com/isqua"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/isquariel/rework-clone/issues"
+    "url": "https://github.com/isqua/rework-clone/issues"
   }
 }
 
